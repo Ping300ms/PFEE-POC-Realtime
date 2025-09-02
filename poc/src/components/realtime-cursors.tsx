@@ -16,7 +16,7 @@ export const RealtimeCursors = ({ roomName, username }: { roomName: string; user
             transitionDuration: '20ms',
             top: 0,
             left: 0,
-            transform: `translate(${cursors[id].position.x}px, ${cursors[id].position.y}px)`,
+            transform: `translate(${cursors[id].position.x - window.innerWidth/2}px, ${cursors[id].position.y - window.innerHeight/2}px)`,
           }}
           color={cursors[id].color}
           name={cursors[id].user.name}
