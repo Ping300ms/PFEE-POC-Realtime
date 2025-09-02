@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { RealtimeCursors } from "./components/realtime-cursors";
-import {RealtimeTextArea} from "./components/RealtimeTextArea.tsx";
+import { RealtimeTextArea } from "./components/RealtimeTextArea";
 
 function App() {
     const [roomName, setRoomName] = useState("bonjour");
@@ -16,7 +16,6 @@ function App() {
 
     return (
         <div className="w-full min-h-screen flex flex-col items-center gap-4 p-6">
-            {/* Room switcher */}
             <div className="flex gap-2">
                 <input
                     type="text"
@@ -33,10 +32,10 @@ function App() {
                 </button>
             </div>
 
-            {/* Re-mounts on room change */}
             <div className="w-full flex-1">
-                <RealtimeTextArea roomName={roomName} username={username} />
-                <RealtimeCursors key={roomName} roomName={roomName} username={username} />
+                {/* key remounts the textarea on room change */}
+                <RealtimeTextArea key={roomName} roomName={roomName} username={username} />
+                <RealtimeCursors key={`cursors:${roomName}`} roomName={roomName} username={username} />
             </div>
         </div>
     );

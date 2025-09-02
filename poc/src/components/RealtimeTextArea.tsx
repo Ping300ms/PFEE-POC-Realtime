@@ -4,7 +4,7 @@ export const RealtimeTextArea: React.FC<{ roomName: string; username: string }> 
                                                                                        roomName,
                                                                                        username,
                                                                                    }) => {
-    const { text, updateText } = useRealtimeRoomText({ roomName, username })
+    const { text, updateText } = useRealtimeRoomText(roomName, username)
 
     return (
         <textarea
