@@ -26,7 +26,7 @@ export const SharedTextArea: React.FC = () => {
             style={{ width: "100%", height: "300px", padding: "8px" }}
             value={localText}
             onChange={(e) => setLocalText(e.target.value)}
-            placeholder="Écrivez ici... tout le monde voit en direct !"
+            placeholder="Écrivez ici..."
         />
     );
 };
