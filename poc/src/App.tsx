@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { RealtimeCursors } from "./components/realtime-cursors";
+import {SharedTextArea} from "./components/sharedTextArea.tsx";
 
 function App() {
     const [roomName, setRoomName] = useState("bonjour");
@@ -34,6 +35,7 @@ function App() {
 
             {/* Re-mounts on room change */}
             <div className="w-full flex-1">
+                <SharedTextArea/>
                 <RealtimeCursors key={roomName} roomName={roomName} username={username} />
             </div>
         </div>
