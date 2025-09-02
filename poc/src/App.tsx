@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { RealtimeCursors } from "./components/realtime-cursors.tsx";
+import { RealtimeCursors } from "./components/realtime-cursors";
 
 function App() {
     const [roomName, setRoomName] = useState("bonjour");
@@ -15,7 +15,7 @@ function App() {
 
     return (
         <div className="w-full min-h-screen flex flex-col items-center gap-4 p-6">
-            {/* Menu de changement de salon */}
+            {/* Room switcher */}
             <div className="flex gap-2">
                 <input
                     type="text"
@@ -32,7 +32,7 @@ function App() {
                 </button>
             </div>
 
-            {/* Le composant se remonte à chaque changement de roomName */}
+            {/* Re-mounts on room change */}
             <div className="w-full flex-1">
                 <RealtimeCursors key={roomName} roomName={roomName} username={username} />
             </div>
