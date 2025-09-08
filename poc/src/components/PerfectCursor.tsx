@@ -1,7 +1,7 @@
 // components/Cursor
 
 import * as React from "react"
-import { usePerfectCursors } from "../hooks/usePerfectCursors"
+import { usePerfectCursor } from "../hooks/usePerfectCursor.ts"
 
 export function PerfectCursor({ point }: { point: number[] }) {
     const rCursor = React.useRef<SVGSVGElement>(null)
@@ -15,7 +15,7 @@ export function PerfectCursor({ point }: { point: number[] }) {
         )
     }, [])
 
-    const onPointMove = usePerfectCursors(animateCursor)
+    const onPointMove = usePerfectCursor(animateCursor)
 
     React.useLayoutEffect(() => onPointMove(point), [onPointMove, point])
 

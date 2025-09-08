@@ -1,18 +1,18 @@
-import { Cursor } from '@/components/cursor'
-import { useRealtimeCursors } from '@/hooks/use-realtime-cursors'
+import { Cursor } from '@/components/Cursor'
+import { useRealtimeCursor } from '@/hooks/useRealtimeCursor'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 const THROTTLE_MS = 50
 
-export const RealtimeCursors = ({
+export const RealtimeCursor = ({
                                   roomName,
                                   username,
                                 }: {
   roomName: string
   username: string
 }) => {
-  const { cursors } = useRealtimeCursors({ roomName, username, throttleMs: THROTTLE_MS })
+  const { cursors } = useRealtimeCursor({ roomName, username, throttleMs: THROTTLE_MS })
 
   const [, force] = useState(0)
   useEffect(() => {

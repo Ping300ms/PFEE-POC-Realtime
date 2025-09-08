@@ -1,3 +1,4 @@
+// @ts-ignore
 import { cn } from '@/lib/utils'
 import { MousePointer2 } from 'lucide-react'
 import React from 'react'

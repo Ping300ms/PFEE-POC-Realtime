@@ -51,7 +51,7 @@ type CursorEventPayload = {
   timestamp: number
 }
 
-export const useRealtimeCursors = ({
+export const useRealtimeCursor = ({
                                      roomName,
                                      username,
                                      throttleMs,

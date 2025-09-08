@@ -1,9 +1,9 @@
-// hooks/usePerfectCursors
+// hooks/usePerfectCursor
 
 import { PerfectCursor } from "perfect-cursors"
 import { useState, useLayoutEffect, useCallback } from "react"
 
-export function usePerfectCursors(
+export function usePerfectCursor(
     cb: (point: number[]) => void,
     point?: number[]
 ) {

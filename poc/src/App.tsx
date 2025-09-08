@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { RealtimeCursors } from "./components/realtime-cursors";
+import { RealtimeCursor } from "./components/RealtimeCursor.tsx";
 import { RealtimeTextArea } from "./components/RealtimeTextArea";
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
             <div className="w-full flex-1">
                 {/* key remounts the textarea on room change */}
                 <RealtimeTextArea key={roomName} roomName={roomName} username={username} />
-                <RealtimeCursors key={`cursors:${roomName}`} roomName={roomName} username={username} />
+                <RealtimeCursor key={`cursors:${roomName}`} roomName={roomName} username={username} />
             </div>
         </div>
     );
