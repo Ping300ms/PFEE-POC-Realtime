@@ -37,7 +37,21 @@ export function useRealtimeRoomText(roomName: string, username: string) {
 
     const documentId = hashRoomToId(roomName)
 
-    // … ton code fetch initial du texte inchangé …
+    useEffect(() => {
+        const loadInitialText = async () => {
+            const { data, error } = await supabase
+                .from("shared_text")
+                .select("content")
+                .eq("id", documentId)
+                .single()
+
+            if (!error && data?.content) {
+                setText(data.content)
+            }
+        }
+
+        loadInitialText()
+    }, [documentId])
 
     useEffect(() => {
         const roomChannel = supabase.channel(`room:${roomName}`)
