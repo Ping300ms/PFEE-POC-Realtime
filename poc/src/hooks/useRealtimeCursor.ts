@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/client'
 import { RealtimeChannel } from '@supabase/supabase-js'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+type RealtimeChannelStatus = 'SUBSCRIBED' | 'TIMED_OUT' | 'CLOSED' | 'CHANNEL_ERROR'
+
 const useThrottleCallback = <Params extends unknown[], Return>(
     callback: (...args: Params) => Return,
     delay: number
@@ -39,7 +41,7 @@ const supabase = createClient()
 const generateRandomColor = () => `hsl(${Math.floor(Math.random() * 360)}, 100%, 70%)`
 const generateRandomNumber = () => Math.floor(Math.random() * 100)
 
-const EVENT_NAME = 'realtime-cursor-move'
+const EVENT_NAME = 'realtime-curso  r-move'
 
 type CursorEventPayload = {
   position: {
@@ -95,7 +97,35 @@ export const useRealtimeCursor = ({
 
   useEffect(() => {
     const channel = supabase.channel(roomName)
-    channelRef.current = channel
+    channelRef.current = channel;
+
+    channel
+        .on('presence', { event: 'sync' }, () => {
+            const state = channel.presenceState()
+            const activeUsers = Object.values(state).flat() as {
+                user: { id: number; name: string }
+                color: string
+            }[]
+
+            setCursors((prev) => {
+                const updated = { ...prev }
+                const activeIds = new Set(activeUsers.map((u) => u.user.id))
+                for (const id of Object.keys(updated)) {
+                    if (!activeIds.has(Number(id))) {
+                        delete updated[id]
+                    }
+                }
+                return updated
+            })
+        })
+          .subscribe(async (status : RealtimeChannelStatus) => {
+              if (status === 'SUBSCRIBED') {
+                  await channel.track({
+                      user: { id: userId, name: username },
+                      color,
+                  })
+              }
+          })
 
     channel
         .on('broadcast', { event: EVENT_NAME }, (data: { payload: CursorEventPayload }) => {
